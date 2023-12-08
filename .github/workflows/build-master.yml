@@ -4,6 +4,7 @@ on:
   push:
     branches:
     - 2.x
+    - refactor/folia
     - dev/*
   release:
     types:

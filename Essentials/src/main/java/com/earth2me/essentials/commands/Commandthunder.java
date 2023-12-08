@@ -21,17 +21,18 @@ public class Commandthunder extends EssentialsCommand {
             throw new NotEnoughArgumentsException();
         }
 
-        final World world = user.getWorld();
-        final boolean setThunder = args[0].equalsIgnoreCase("true");
-        if (args.length == 1) {
+        ess.ensureGlobal(() -> {
+            final World world = user.getWorld();
+            final boolean setThunder = args[0].equalsIgnoreCase("true");
+
             world.setThundering(setThunder);
             user.sendMessage(tl("thunder", setThunder ? tl("enabled") : tl("disabled")));
-            return;
-        }
 
-        world.setThundering(setThunder);
-        world.setThunderDuration(Integer.parseInt(args[1]) * 20);
-        user.sendMessage(tl("thunderDuration", setThunder ? tl("enabled") : tl("disabled"), Integer.parseInt(args[1])));
+            if (args.length >= 2) {
+                world.setThunderDuration(Integer.parseInt(args[1]) * 20);
+                user.sendMessage(tl("thunderDuration", setThunder ? tl("enabled") : tl("disabled"), Integer.parseInt(args[1])));
+            }
+        });
     }
 
     @Override

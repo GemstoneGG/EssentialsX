@@ -8,6 +8,7 @@ description: Provides an essential, core set of commands for Bukkit.
 softdepend: [Vault, LuckPerms]
 authors: [Zenexer, ementalo, Aelux, Brettflan, KimKandor, snowleo, ceulemans, Xeology, KHobbits, md_5, Iaccidentally, drtshock, vemacs, SupaHam, mdcfe, JRoy, pop4959]
 api-version: "1.13"
+folia-supported: true
 commands:
   afk:
     description: Marks you as away-from-keyboard.
@@ -638,6 +639,7 @@ permissions:
       essentials.seen.ip: true
       essentials.seen.location: true
       essentials.seen.uuid: true
+      essentials.seen.whitelist: true
   essentials.keepinv:
     default: false
     description: Controls whether players keep their inventory on death.
@@ -713,6 +715,7 @@ permissions:
       essentials.sudo.exempt: true
       essentials.tempban.exempt: true
       essentials.exempt.protect: true
+      essentials.editsign.waxed.exempt: true
   essentials.nick.hideprefix:
     default: false
     description: Players with this permission will not have the nickname prefix applied to them
