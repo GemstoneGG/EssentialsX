@@ -7,9 +7,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.Server;
 import org.bukkit.World;
+import org.bukkit.Bukkit;
 
 import java.lang.management.ManagementFactory;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 
 import static com.earth2me.essentials.I18n.tl;
@@ -49,12 +51,14 @@ public class Commandgc extends EssentialsCommand {
                     break;
             }
 
-            int tileEntities = 0;
+            final AtomicInteger tileEntities = new AtomicInteger();
 
             try {
-                for (final Chunk chunk : w.getLoadedChunks()) {
-                    tileEntities += chunk.getTileEntities().length;
-                }
+                Bukkit.getScheduler().runTask(ess, () -> {
+                    for (final Chunk chunk : w.getLoadedChunks()) {
+                        tileEntities.addAndGet(chunk.getTileEntities().length);
+                    }
+                });
             } catch (final java.lang.ClassCastException ex) {
                 ess.getLogger().log(Level.SEVERE, "Corrupted chunk data on world " + w, ex);
             }
